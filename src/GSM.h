@@ -46,6 +46,8 @@ public:
     */
   GSM3_NetworkStatus_t begin(const char* pin = 0, bool restart = true, bool synchronous = true);
 
+  GSM3_NetworkStatus_t continueBegin(const char* pin = 0, bool synchronous = true);
+
   /** Check network access status
       @return 1 if Alive, 0 if down
    */
