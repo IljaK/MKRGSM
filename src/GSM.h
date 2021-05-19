@@ -46,6 +46,14 @@ public:
     */
   GSM3_NetworkStatus_t begin(const char* pin = 0, bool restart = true, bool synchronous = true);
 
+  /** Continue GSM network initialization without breaking/restarting modem
+      @param pin         SIM PIN number (4 digits in a string, example: "1234"). If
+                         NULL the SIM has no configured PIN.
+      @param synchronous If TRUE the call only returns after the Start is complete
+                         or fails. If FALSE the call will return immediately. You have
+                         to call repeatedly ready() until you get a result. Default is TRUE.
+      @return If synchronous, GSM3_NetworkStatus_t. If asynchronous, returns 0.
+    */
   GSM3_NetworkStatus_t continueBegin(const char* pin = 0, bool synchronous = true);
 
   /** Check network access status

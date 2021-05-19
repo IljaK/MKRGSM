@@ -60,24 +60,7 @@ GSM3_NetworkStatus_t GSM::begin(const char* pin, bool restart, bool synchronous)
   if (!MODEM.begin(restart)) {
     _state = ERROR;
   } else {
-    _pin = pin;
-    _state = IDLE;
-    _readyState = READY_STATE_CHECK_SIM;
-
-    if (synchronous) {
-      unsigned long start = millis();
-
-      while (ready() == 0) {
-        if (_timeout && !((millis() - start) < _timeout)) {
-          _state = ERROR;
-          break;
-        }
-
-        delay(100);
-      }
-    } else {
-      return (GSM3_NetworkStatus_t)0;
-    }
+    continueBegin(pin, synchronous);
   }
 
   return _state;
@@ -86,25 +69,24 @@ GSM3_NetworkStatus_t GSM::begin(const char* pin, bool restart, bool synchronous)
 
 GSM3_NetworkStatus_t GSM::continueBegin(const char* pin, bool synchronous)
 {
-    _pin = pin;
-    _state = IDLE;
-    _readyState = READY_STATE_CHECK_SIM;
+  _pin = pin;
+  _state = IDLE;
+  _readyState = READY_STATE_CHECK_SIM;
 
-    if (synchronous) {
-        unsigned long start = millis();
+  if (synchronous) {
+    unsigned long start = millis();
 
-        while (ready() == 0) {
-        if (_timeout && !((millis() - start) < _timeout)) {
-            _state = ERROR;
-            break;
-        }
+    while (ready() == 0) {
+      if (_timeout && !((millis() - start) < _timeout)) {
+        _state = ERROR;
+        break;
+      }
 
-        delay(100);
-        }
-    } else {
-        return (GSM3_NetworkStatus_t)0;
+      delay(100);
     }
-  return _state;
+    return _state;
+  }
+  return (GSM3_NetworkStatus_t)0;
 }
 
 int GSM::isAccessAlive()
