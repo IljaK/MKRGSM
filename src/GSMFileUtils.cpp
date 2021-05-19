@@ -96,7 +96,7 @@ uint32_t GSMFileUtils::downloadFile(const String filename, const char buf[], uin
 
     char hex[size * 2] { 0 };
 
-    for (auto i = 0; i < size; i++) {
+    for (uint32_t i = 0; i < size; i++) {
         byte b = buf[i];
 
         byte n1 = (b >> 4) & 0x0f;
@@ -150,7 +150,7 @@ uint32_t GSMFileUtils::readFile(const String filename, String* content)
     (*_data) = "";
     (*_data).reserve(size);
 
-    for (auto i = 0; i < size; i++) {
+    for (uint32_t i = 0; i < size; i++) {
         byte n1 = response[skip + i * 2];
         byte n2 = response[skip + i * 2 + 1];
 
@@ -199,7 +199,7 @@ uint32_t GSMFileUtils::readFile(const String filename, uint8_t* content)
 
     memset(content, 0, size);
 
-    for (auto i = 0; i < size; i++) {
+    for (uint32_t i = 0; i < size; i++) {
         byte n1 = response[skip + i * 2];
         byte n2 = response[skip + i * 2 + 1];
 
@@ -246,7 +246,7 @@ uint32_t GSMFileUtils::readBlock(const String filename, const uint32_t offset, c
     uint32_t size = sizePart.toInt() / 2;
     skip += 3;
 
-    for (auto i = 0; i < size; i++) {
+    for (uint32_t i = 0; i < size; i++) {
         byte n1 = response[skip + i * 2];
         byte n2 = response[skip + i * 2 + 1];
 
