@@ -302,6 +302,11 @@ void ModemClass::poll()
               responseResultIndex = _buffer.lastIndexOf("NO CARRIER\r\n");
               if (responseResultIndex != -1) {
                 _ready = 3;
+              } else {
+                responseResultIndex = _buffer.lastIndexOf("ABORTED\r\n");
+                if (responseResultIndex != -1) {
+                  _ready = 4;
+                }
               }
             }
           }
