@@ -67,6 +67,8 @@ public:
 
   void setBaudRate(unsigned long baud);
 
+  void flush();
+
 private:
   Uart* _uart;
   unsigned long _baud;

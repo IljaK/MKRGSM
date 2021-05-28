@@ -366,4 +366,11 @@ void ModemClass::setBaudRate(unsigned long baud)
   _baud = baud;
 }
 
+void ModemClass::flush()
+{
+  _responseDataStorage = NULL;
+  _buffer = "";
+  _ready = -1;
+}
+
 ModemClass MODEM(SerialGSM, 921600, GSM_RESETN, GSM_DTR);
